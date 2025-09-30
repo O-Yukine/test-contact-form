@@ -24,8 +24,8 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required',
             'last_name' => 'required',
+            'first_name' => 'required',
             'gender' => 'required',
             'email' => 'required|email',
             'tel1' => 'required',
@@ -42,8 +42,8 @@ class ContactRequest extends FormRequest
     public function messages()
     {
         return [
-            'first_name.required' => '姓を入力してください',
-            'last_name.required' => '名を入力してください',
+            'last_name.required' => '姓を入力してください',
+            'first_name.required' => '名を入力してください',
             'gender.required' => '性別を選択してください',
             'email.required' => 'メールアドレスを入力してください',
             'email.email' => 'メールアドレスはメール形式で入力してください',
