@@ -36,14 +36,19 @@
                     <tr class="confirm-table__row">
                         <th class="confirm-table__header">メールアドレス</th>
                         <td class="confirm-table__text">
-                            <input type="email" name="email" value="{{ $contact['email'] }}" readonly />
+                            <input type="text" name="email" value="{{ $contact['email'] }}" readonly />
                         </td>
                     </tr>
                     <tr class="confirm-table__row">
                         <th class="confirm-table__header">電話番号</th>
                         <td class="confirm-table__text">
+
                             <input type="tel" name="tel"
                                 value="{{ $contact['tel1'] . $contact['tel2'] . $contact['tel3'] }}" readonly />
+                            <input type="hidden" name="tel1" value="{{ $contact['tel1'] }}" />
+                            <input type="hidden" name="tel2" value="{{ $contact['tel2'] }}" />
+                            <input type="hidden" name="tel3" value="{{ $contact['tel3'] }}" />
+
                         </td>
                     </tr>
                     <tr class="confirm-table__row">
@@ -79,13 +84,13 @@
         </form>
         <a href="#" onclick="document.getElementById('back-form').submit(); return false;">修正する</a>
 
-        <form id="back-form" action="{{ url('/') }}" method="POST">
+        {{-- <form id="back-form" action="{{ url('/') }}" method="POST">
             @csrf
             @foreach ($contact as $key => $value)
                 <input type="hidden" name="{{ $key }}" value="{{ $value }}">
             @endforeach
             <input type="hidden" name="category_id" value="{{ $category->id }}">
-        </form>
+        </form> --}}
     </div>
 
     </div>
