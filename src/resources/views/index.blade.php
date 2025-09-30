@@ -161,7 +161,7 @@
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--textarea">
-                            <textarea name="detail" placeholder="お問い合わせ内容をご記入ください" value="{{ old('detail') }}"></textarea>
+                            <textarea name="detail" placeholder="お問い合わせ内容をご記入ください">{{ old('detail') }}</textarea>
                         </div>
                     </div>
                 </div>
