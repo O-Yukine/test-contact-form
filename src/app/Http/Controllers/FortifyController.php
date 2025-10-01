@@ -8,9 +8,14 @@ use App\Models\Contact;
 
 class FortifyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $contacts = Contact::with('category')->Paginate(7);
+        $contacts = Contact::with('category')
+            ->KeywordSearch($request->input('keyword'))
+            ->GenderSearch($request->input('gender'))
+            ->CategorySearch($request->input('category_id'))
+            ->CreatedSearch($request->input('created_at'))
+            ->paginate(7);
         $categories = Category::all();
 
         return view('admin', compact('contacts', 'categories'));

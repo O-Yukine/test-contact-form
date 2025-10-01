@@ -7,12 +7,40 @@
 @section('content')
     <div class="admin">
         <div class="admin__content">
-            <div class="header">
+            <div class="section__title">
                 <h2>Admin</h2>
             </div>
-            <div class="search">
-                <input type="text" class="search_keyword">
-            </div>
+            <form class="search-form" action="/admin" method="get">
+                @csrf
+                <div class="search-form__item">
+                    <input class="search-form__item-input" type="text" name="keyword"
+                        value="{{ old('keyword') }}"placeholder="名前やメールアドレスを入力してください" />
+                    <select class="search-form__item-gender" name="gender">
+                        <option value="" {{ old('gender') === '' ? 'selected' : '' }}>性別</option>
+                        <option value="1" {{ old('gender') === '1' ? 'selected' : '' }}>男性</option>
+                        <option value="2" {{ old('gender') === '2' ? 'selected' : '' }}>女性</option>
+                        <option value="3" {{ old('gender') === '3' ? 'selected' : '' }}>その他</option>
+                    </select>
+
+
+                    <select class="search-form__item-category"name="category_id">
+                        <option value="">お問い合わせの種類</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"{{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                {{ $category->content }}</option>
+                        @endforeach
+                    </select>
+                    <input type="date" class="search-form__item-date" name="created_at"
+                        value="{{ old('created_at') }}" />
+                </div>
+                <div class="search-form__button">
+                    <button class="search-form__button-submit" type="submit">検索</button>
+                    <button type="button" class="search-form__button-reset" onclick="location.href='{{ url('/admin') }}'">
+                        リセット
+                    </button>
+
+                </div>
+            </form>
             <div class="buttons">
                 <div class="export-btn">
                     <button class="export">エクスポート</button>
@@ -50,12 +78,12 @@
                             </td>
                             <td class="detail-button">
                                 <button class="detail-btn" data-id="{{ $contact->id }}"
-                                    data-last_name="{{ $contact->last_name }}" data-first_name="{{ $contact->first_name }}"
-                                    data-gender="{{ $contact->gender }}" data-email="{{ $contact->email }}"
-                                    data-tel="{{ $contact->tel }}" data-address="{{ $contact->address }}"
-                                    data-building="{{ $contact->building }}"
-                                    data-category="{{ $contact->category->content }}" data-detail="{{ $contact->detail }}"
-                                    onclick="openModal(this)">
+                                    data-last_name="{{ $contact->last_name }}"
+                                    data-first_name="{{ $contact->first_name }}" data-gender="{{ $contact->gender }}"
+                                    data-email="{{ $contact->email }}" data-tel="{{ $contact->tel }}"
+                                    data-address="{{ $contact->address }}" data-building="{{ $contact->building }}"
+                                    data-category="{{ optional($contact->category)->content }}"
+                                    data-detail="{{ $contact->detail }}" onclick="openModal(this)">
                                     詳細
                                 </button>
 
@@ -81,10 +109,10 @@
             <table class="modal__content">
                 <tr class="modal-inner">
                     <th class="modal-ttl">お名前</th>
-                    <td class="modal-data"><span id="modal-name">
-                            {{ $contact['last_name'] }}
-                            <span class="space"></span>
-                            <span class="firstName">{{ $contact['first_name'] }}</span></span>
+                    <td class="modal-data">
+                        <span id="modal-name">
+                            {{ $contacts['last_name'] }}
+                            {{ $contacts['first_name'] }}</span>
                     </td>
                 </tr>
                 <tr class="modal-inner">
@@ -92,40 +120,42 @@
                     <td class="modal-data"><span id="modal-gender">
                             {{-- <input type="hidden" value="{{ $contact['gender'] }}" /> --}}
                             <?php
-                            if ($contact['gender'] == '1') {
+                            if ($contacts['gender'] == '1') {
                                 echo '男性';
-                            } elseif ($contact['gender'] == '2') {
+                            } elseif ($contacts['gender'] == '2') {
                                 echo '女性';
                             } else {
                                 echo 'その他';
                             }
-                            ?></span> --}}
+                            ?></span>
                     </td>
                 </tr>
                 <tr class="modal-inner">
                     <th class="modal-ttl">メールアドレス</th>
-                    <td class="modal-data"><span id="modal-email">{{ $contact['email'] }}</span></td>
+                    <td class="modal-data"><span id="modal-email">{{ $contacts['email'] }}</span></td>
                 </tr>
                 <tr class="modal-inner">
                     <th class="modal-ttl">電話番号</th>
-                    <td class="modal-data"><span id="modal-tel">{{ $contact['tell'] }}</span></td>
+                    <td class="modal-data"><span id="modal-tel">{{ $contacts['tell'] }}</span></td>
                 </tr>
                 <tr class="modal-inner">
                     <th class="modal-ttl">住所</th>
-                    <td class="modal-data"><span id="modal-address">{{ $contact['address'] }}</span></td>
+                    <td class="modal-data"><span id="modal-address">{{ $contacts['address'] }}</span></td>
                 </tr>
                 <tr class="modal-inner">
                     <th class="modal-ttl">建物名</th>
-                    <td class="modal-data"><span id="modal-building">{{ $contact['building'] }}</span></td>
+                    <td class="modal-data"><span id="modal-building">{{ $contacts['building'] }}</span></td>
                 </tr>
                 <tr class="modal-inner">
                     <th class="modal-ttl">お問い合わせの種類</th>
-                    <td class="modal-data"><span id="modal-category">{{ $contact['category']['content'] }}</span></td>
+                    <td class="modal-data"><span id="modal-category">
+                            {{-- {{ $contacts['category']['content'] }} --}}
+                        </span></td>
                 </tr>
                 <tr class="modal-inner">
                     <th class="modal-ttl--last">お問い合わせ内容</th>
                     <td class="modal-data--last"><span id="modal-detail">
-                            {{ $contact['detail'] }}
+                            {{ $contacts['detail'] }}
                         </span> </td>
                     <input type="hidden" name="id" id="modal-id">
                 </tr>
@@ -134,7 +164,7 @@
             <form class="delete-form" action="/delete" method="post">
                 @method('delete')
                 @csrf
-                <input type="hidden" name="id" value="{{ $contact['id'] }}" />
+                <input type="hidden" name="id" />
                 <button class="delete-btn">削除</button>
             </form>
 

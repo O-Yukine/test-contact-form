@@ -3,8 +3,92 @@
     padding: 30px 15px;
     max-width: 1230px;
 }
+
+.section__title {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.search-form {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    width: 70%;
+    text-align: center;
+}
+
+.search-form__item {
+    display: flex;
+    width: 70%;
+    margin-right: 20px;
+}
+.search-form__item-input {
+    margin-right: 10px;
+    padding: 10px;
+    width: 40%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+.search-form__item-gender {
+    padding: 10px;
+    margin-left: 20px;
+    width: 10%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    appearance: none;
+}
+.search-form__item-category {
+    padding: 10px;
+    margin-left: 20px;
+    width: 25%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    appearance: none;
+}
+.search-form__item-date {
+    padding: 10px;
+    margin-left: 20px;
+    width: 15%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    appearance: none;
+}
+
+.search-form__button {
+    width: 20%;
+    display: flex;
+}
+
+.search-form__button-submit {
+    padding: 10px;
+    width: 50%;
+    margin-right: 20px;
+    height: 40px;
+    border: none;
+    border-radius: 3px;
+    background: #a05703;
+    color: #fff;
+    cursor: pointer;
+}
+.search-form__button-reset {
+    padding: 10px;
+    width: 50%;
+    height: 40px;
+    border: none;
+    border-radius: 3px;
+    background: #a59d94;
+    color: #fff;
+    cursor: pointer;
+}
+
 .pagination {
-    display: flex; /* 横並びにする */
+    display: flex;
+    justify-content: right; /* 横並びにする */
     list-style: none; /* リストの丸印や番号を消す */
     padding: 0; /* 余白をリセット */
     margin: 0; /* 余白をリセット */
