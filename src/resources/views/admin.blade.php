@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <button class="export">エクスポート</button>
             </div>
             <div class="paginate">
-                {{ $contacts->links() }}
+                {{-- {{ $contacts->links() }} --}}
             </div>
         </div>
 
@@ -28,19 +28,15 @@
                     <td class="attendance-table__item">サンプル</td>
                     <td class="attendance-table__item">サンプル</td>
                     <td class="attendance-table__item">サンプル</td>
+
+                    <td class="detail-button">
+                        <button wire:click="openModal()" type="button" class="detail">詳細</button>
+                    </td>
                 </tr>
             </table>
         </div>
-
-
     </div>
-
-
-
-
-    <td class="detail-button">
-        <button wire:click="openModal()" type="button" class="detail">詳細</button>
-        @if ($showModal)
+    {{-- @if ($showModal)
             <div class="modal-wrapper">
                 <div class="modal-window">
                     <button wire:click="closeModal()" type="button" class="modal-close">
@@ -58,17 +54,17 @@
                         <tr class="modal-inner">
                             <th class="modal-ttl">性別</th>
                             <td class="modal-data">
-                                <input type="hidden" value="{{ $contact['gender'] }}" />
-                                <?php
-                                if ($contact['gender'] == '1') {
-                                    echo '男性';
-                                } elseif ($contact['gender'] == '2') {
-                                    echo '女性';
-                                } else {
-                                    echo 'その他';
-                                }
-                                ?>
-                            </td>
+                                <input type="hidden" value="{{ $contact['gender'] }}" /> --}}
+    {{-- <?php
+    if ($contact['gender'] == '1') {
+        echo '男性';
+    } elseif ($contact['gender'] == '2') {
+        echo '女性';
+    } else {
+        echo 'その他';
+    }
+    ?>  --}}
+    {{-- </td>
                         </tr>
                         <tr class="modal-inner">
                             <th class="modal-ttl">メールアドレス</th>
@@ -77,8 +73,8 @@
                         <tr class="modal-inner">
                             <th class="modal-ttl">電話番号</th>
                             <td class="modal-data">{{ $contact['tell'] }}</td>
-                        </tr>
-                        <tr class="modal-inner">
+                        </tr> --}}
+    {{-- <tr class="modal-inner">
                             <th class="modal-ttl">住所</th>
                             <td class="modal-data">{{ $contact['address'] }}</td>
                         </tr>
@@ -89,8 +85,8 @@
                         <tr class="modal-inner">
                             <th class="modal-ttl">お問い合わせの種類</th>
                             <td class="modal-data">{{ $contact['category']['content'] }}</td>
-                        </tr>
-                        <tr class="modal-inner">
+                        </tr> --}}
+    {{-- <tr class="modal-inner">
                             <th class="modal-ttl--last">お問い合わせ内容</th>
                             <td class="modal-data--last">
                                 {{ $contact['detail'] }}
@@ -104,11 +100,11 @@
                         <button class="delete-btn">削除</button>
                     </form>
                 </div>
-            </div>
-        @endif
+            </div> --}}
+    {{-- @endif  --}}
     </td>
     </tr>
-    @endforeach
+
     </table>
     </div>
     </div>

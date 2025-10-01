@@ -2,6 +2,12 @@
 
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FortifyController;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
+use App\Actions\Fortify\CreateNewUser;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Fortify\Fortify;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +23,21 @@ use Illuminate\Support\Facades\Route;
 Route::match(['get', 'post'], '/', [ContactController::class, 'index']);
 Route::post('/confirm', [ContactController::class, "confirm"]);
 Route::post('/thanks', [ContactController::class, "store"]);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [FortifyController::class, 'index']);
+});
+
+Route::post(
+    '/register',
+    function (RegisterRequest $request, CreateNewUser $creator) {
+        $user = $creator->create($request->validated());
+        return redirect('/login');
+    }
+);
+Route::post('/login', function (LoginRequest $request) {
+    if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        $request->session()->regenerate();
+        return redirect('/admin');
+    }
+});
