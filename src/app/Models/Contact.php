@@ -30,10 +30,12 @@ class Contact extends Model
     public function scopeKeywordSearch($query, $keyword)
     {
         if (!empty($keyword)) {
-            $query->whereRaw("CONCAT(last_name, first_name) LIKE ?", ['%' . $keyword . '%'])
-                ->orWhere('last_name', 'like', '%' . $keyword . '%')
-                ->orWhere('first_name', 'like', '%' . $keyword . '%')
-                ->orWhere('email', 'like', '%' . $keyword . '%');
+            $query->where(function ($q) use ($keyword) {
+                $q->whereRaw("CONCAT(last_name, first_name) LIKE ?", ["%{$keyword}%"])
+                    ->orWhere('last_name', 'like', "%{$keyword}%")
+                    ->orWhere('first_name', 'like', "%{$keyword}%")
+                    ->orWhere('email', 'like', "%{$keyword}%");
+            });
         }
     }
 

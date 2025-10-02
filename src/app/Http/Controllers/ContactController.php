@@ -29,7 +29,7 @@ class ContactController extends Controller
         $content = $request->input('category_id');
         $category = Category::find($content);
 
-        return view('confirm', compact('contact', 'category'));
+        return view('/confirm', compact('contact', 'category'));
     }
 
     public function store(ContactRequest $request)

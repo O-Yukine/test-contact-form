@@ -32,7 +32,7 @@
                             <li class="header-nav__item">
                                 <form action="/logout" method="POST">
                                     @csrf
-                                    <button class="header-nav__button">ログアウト</button>
+                                    <button type="submit" class="header-nav__button">ログアウト</button>
                                 </form>
                             </li>
                         @endauth
@@ -40,10 +40,12 @@
                 </nav>
             </div>
         </div>
+        @livewireStyles
     </header>
     <main>
         @yield('content')
     </main>
+    @livewireScripts
 </body>
 
 </html>

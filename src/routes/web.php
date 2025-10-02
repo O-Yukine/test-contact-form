@@ -27,7 +27,6 @@ Route::post('/thanks', [ContactController::class, "store"]);
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [FortifyController::class, 'index']);
 });
-
 Route::post(
     '/register',
     function (RegisterRequest $request, CreateNewUser $creator) {
@@ -41,3 +40,5 @@ Route::post('/login', function (LoginRequest $request) {
         return redirect('/admin');
     }
 });
+
+Route::delete('/admin', [FortifyController::class, 'destroy']);

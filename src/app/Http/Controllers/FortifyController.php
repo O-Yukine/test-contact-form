@@ -18,6 +18,12 @@ class FortifyController extends Controller
             ->paginate(7);
         $categories = Category::all();
 
-        return view('admin', compact('contacts', 'categories'));
+        return view('/admin', compact('contacts', 'categories'));
+    }
+
+    public function destroy(Request $request)
+    {
+        Contact::findOrFail($request->id)->delete();
+        return redirect('/admin');
     }
 }
