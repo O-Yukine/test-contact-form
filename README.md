@@ -24,7 +24,7 @@
 
 ## ER 図
 
-（ここに ER 図の画像やリンクを入れてください）
+![ER Diagram](contact.png)
 
 ## URL
 

@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Laravel\Fortify\Fortify;
 
 /*
@@ -42,3 +43,10 @@ Route::post('/login', function (LoginRequest $request) {
 });
 
 Route::delete('/admin', [FortifyController::class, 'destroy']);
+
+Route::post('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/login');
+});
