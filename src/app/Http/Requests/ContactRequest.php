@@ -49,7 +49,7 @@ class ContactRequest extends FormRequest
             'email.email' => 'メールアドレスはメール形式で入力してください',
             'tel1.required' => '電話番号を入力してください',
             'tel2.required' => '電話番号を入力してください',
-            'tel.required' => '電話番号を入力してください',
+            'tel3.required' => '電話番号を入力してください',
             'address.required' => '住所を入力してください',
             'category_id.required' => 'お問い合わせの種類を選択してください',
             'detail.required' => 'お問合せ内容を入力してください',
