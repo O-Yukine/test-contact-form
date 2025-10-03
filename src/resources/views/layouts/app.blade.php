@@ -15,7 +15,6 @@
     <header class="header">
         <div class="header__inner">
             <div class="header-utilities">
-
                 <a class="header__logo" href="/">
                     FashionablyLate
                 </a>
@@ -23,16 +22,18 @@
                     <ul class="header-nav">
                         @guest
                             @if (Route::currentRouteName() === 'register')
-                                <li><a class="header-nav__link" href="/login">ログイン</a></li>
+                                <li><button class="header-nav__button"><a class="header-nav__link"
+                                            href="/login">login</a></button></li>
                             @elseif (Route::currentRouteName() === 'login')
-                                <li><a class="header-nav__link" href="/register">新規登録</a></li>
+                                <li><button class="header-nav__button"><a class="header-nav__link"
+                                            href="/register">register</a></button></li>
                             @endif
                         @endguest
                         @Auth
                             <li class="header-nav__item">
                                 <form action="/logout" method="POST">
                                     @csrf
-                                    <button type="submit" class="header-nav__button">ログアウト</button>
+                                    <button type="submit" class="header-nav__button">logout</button>
                                 </form>
                             </li>
                         @endauth
@@ -40,12 +41,12 @@
                 </nav>
             </div>
         </div>
-        @livewireStyles
+
     </header>
     <main>
         @yield('content')
     </main>
-    @livewireScripts
+
 </body>
 
 </html>
