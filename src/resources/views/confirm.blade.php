@@ -7,7 +7,7 @@
 @section('content')
     <div class="confirm__content">
         <div class="confirm__heading">
-            <h2>Confirm</h2>
+            <h1>Confirm</h1>
         </div>
         <form class="form" action="/thanks" method="POST">
             @csrf
@@ -16,8 +16,9 @@
                     <tr class="confirm-table__row">
                         <th class="confirm-table__header">お名前</th>
                         <td class="confirm-table__text">
-                            <input type="text" name="last_name" value="{{ $contact['last_name'] }}"readonly />
-                            <input type="text" name="first_name" value="{{ $contact['first_name'] }}" readonly />
+                            {{ $contact['last_name'] . ' ' . $contact['first_name'] }}
+                            <input type="hidden" name="last_name" value="{{ $contact['last_name'] }}" />
+                            <input type="hidden" name="first_name" value="{{ $contact['first_name'] }}" />
                         </td>
                     </tr>
                     <tr class="confirm-table__row">
@@ -79,10 +80,10 @@
                 </table>
             </div>
             <div class="form__button">
-
                 <button class="form__button-submit" type="submit">送信</button>
+                <a href="#" onclick="document.getElementById('back-form').submit(); return false;">修正する</a>
+            </div>
         </form>
-        <a href="#" onclick="document.getElementById('back-form').submit(); return false;">修正する</a>
         <form id="back-form" action="/" method="POST">
             @csrf
             @foreach ($contact as $key => $value)
@@ -90,7 +91,5 @@
             @endforeach
             <input type="hidden" name="category_id" value="{{ $category->id }}">
         </form>
-    </div>
-
     </div>
 @endsection
