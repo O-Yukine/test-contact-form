@@ -7,46 +7,45 @@
 @section('content')
     <div class="admin">
         <div class="admin__content">
-            <div class="section__title">
-                <h2>Admin</h2>
+            <div class="admin__heading">
+                <h1>Admin</h1>
             </div>
             <form class="search-form" action="/admin" method="get">
                 @csrf
                 <div class="search-form__item">
                     <input class="search-form__item-input" type="text" name="keyword"
                         value="{{ request('keyword') }}"placeholder="名前やメールアドレスを入力してください" />
-                    <select class="search-form__item-gender" name="gender">
-                        <option value="" {{ request('gender') === '' ? 'selected' : '' }}>性別</option>
-                        <option value="1" {{ request('gender') === '1' ? 'selected' : '' }}>男性</option>
-                        <option value="2" {{ request('gender') === '2' ? 'selected' : '' }}>女性</option>
-                        <option value="3" {{ request('gender') === '3' ? 'selected' : '' }}>その他</option>
-                    </select>
-
-
-                    <select class="search-form__item-category"name="category_id">
-                        <option value="">お問い合わせの種類</option>
-                        @foreach ($categories as $category)
-                            <option
-                                value="{{ $category->id }}"{{ request('category_id') == $category->id ? 'selected' : '' }}>
-                                {{ $category->content }}</option>
-                        @endforeach
-                    </select>
-                    <input type="date" class="search-form__item-date" name="created_at"
-                        value="{{ request('created_at') }}" />
-                </div>
-                <div class="search-form__button">
+                    <div class="search"><select class="search-form__item-gender" name="gender">
+                            <option value="" {{ request('gender') === '' ? 'selected' : '' }}>性別</option>
+                            <option value="1" {{ request('gender') === '1' ? 'selected' : '' }}>男性</option>
+                            <option value="2" {{ request('gender') === '2' ? 'selected' : '' }}>女性</option>
+                            <option value="3" {{ request('gender') === '3' ? 'selected' : '' }}>その他</option>
+                        </select></div>
+                    <div class="search">
+                        <select class="search-form__item-category"name="category_id">
+                            <option value="">お問い合わせの種類</option>
+                            @foreach ($categories as $category)
+                                <option
+                                    value="{{ $category->id }}"{{ request('category_id') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->content }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="search">
+                        <input type="date" class="search-form__item-date" name="created_at"
+                            {{ request('created_at') }}" />
+                    </div>
                     <button class="search-form__button-submit" type="submit">検索</button>
                     <button type="button" class="search-form__button-reset" onclick="location.href='{{ url('/admin') }}'">
                         リセット
                     </button>
-
                 </div>
             </form>
             <div class="buttons">
-                <div class="export-btn">
-                    <button class="export">エクスポート</button>
+                <div class="buttons__export">
+                    <button class="buttons__export--submit">エクスポート</button>
                 </div>
-                <div class="">
+                <div class="pagination">
                     {{ $contacts->links() }}
                 </div>
             </div>
@@ -57,13 +56,13 @@
                         <th class="admin-table__header">性別</th>
                         <th class="admin-table__header">メールアドレス</th>
                         <th class="admin-table__header">お問い合わせの種類</th>
+                        <th class="admin-table__header"></th>
                     </tr>
                     @foreach ($contacts as $contact)
                         <tr class="admin-table__row">
-                            <td class="admin-table__item"><span>{{ $contact->last_name }}</span>
-                                <span>{{ $contact->first_name }}</span>
+                            <td class="admin-table__item"> {{ $contact->last_name . ' ' . $contact->first_name }}
                             </td>
-                            <td class="aadmin-table__item"><input type="hidden" name="gender"
+                            <td class="admin-table__item"><input type="hidden" name="gender"
                                     value="{{ $contact->gender }}" />
                                 @if ($contact->gender == 1)
                                     男性
@@ -77,8 +76,8 @@
                             <td class="admin-table__item"> {{ $contact->category->content }}
 
                             </td>
-                            <td class="detail-button">
-                                <button class="detail-btn" data-id="{{ $contact->id }}"
+                            <td class="admin-table__detail">
+                                <button class="admin-table__detail-button" data-id="{{ $contact->id }}"
                                     data-last_name="{{ $contact->last_name }}"
                                     data-first_name="{{ $contact->first_name }}" data-gender="{{ $contact->gender }}"
                                     data-email="{{ $contact->email }}" data-tel="{{ $contact->tel }}"
@@ -94,12 +93,12 @@
             </div>
         </div>
     </div>
-
     <div id="modal" class="modal-wrapper" style="display: none;">
         <div class="modal-window">
-            <button type="button "onclick="document.getElementById('modal').style.display='none'">×</button>
-
-
+            <div class="modal-window__close">
+                <button class="modal-window__close--button"
+                    type="button "onclick="document.getElementById('modal').style.display='none'"></button>
+            </div>
             <table class="modal__content">
                 <tr class="modal-inner">
                     <th class="modal-ttl">お名前</th>
