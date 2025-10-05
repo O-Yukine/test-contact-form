@@ -49,7 +49,9 @@
     border-radius: 3px;
     appearance: none;
 }
-
+.form__button {
+    margin: 40px;
+}
 .form__button-submit {
     padding: 10px 40px;
     width: 120px;

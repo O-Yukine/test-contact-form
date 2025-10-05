@@ -81,7 +81,7 @@
             </div>
             <div class="form__button">
                 <button class="form__button-submit" type="submit">送信</button>
-                <a href="#" onclick="document.getElementById('back-form').submit(); return false;">修正する</a>
+                <a href="#" onclick="document.getElementById('back-form').submit(); return false;">修正</a>
             </div>
         </form>
         <form id="back-form" action="/" method="POST">

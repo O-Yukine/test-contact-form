@@ -83,19 +83,9 @@
                     <span class="form__label--item">電話番号</span>
                     <span class="form__label--required">※</span>
                     <div class="form__error">
-                        @error('tel1')
-                            {{ $message }}
-                        @enderror
-                    </div>
-                    <div class="form__error">
-                        @error('tel2')
-                            {{ $message }}
-                        @enderror
-                    </div>
-                    <div class="form__error">
-                        @error('tel3')
-                            {{ $message }}
-                        @enderror
+                        {{ $errors->first('tel1') ?? '' }}
+                        {{ $errors->first('tel2') ?? '' }}
+                        {{ $errors->first('tel3') ?? '' }}
                     </div>
                 </div>
                 <div class="form__group-content-tel">
