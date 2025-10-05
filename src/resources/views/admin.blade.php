@@ -15,26 +15,22 @@
                 <div class="search-form__item">
                     <input class="search-form__item-input" type="text" name="keyword"
                         value="{{ request('keyword') }}"placeholder="名前やメールアドレスを入力してください" />
-                    <div class="search"><select class="search-form__item-gender" name="gender">
-                            <option value="" {{ request('gender') === '' ? 'selected' : '' }}>性別</option>
-                            <option value="1" {{ request('gender') === '1' ? 'selected' : '' }}>男性</option>
-                            <option value="2" {{ request('gender') === '2' ? 'selected' : '' }}>女性</option>
-                            <option value="3" {{ request('gender') === '3' ? 'selected' : '' }}>その他</option>
-                        </select></div>
-                    <div class="search">
-                        <select class="search-form__item-category"name="category_id">
-                            <option value="">お問い合わせの種類</option>
-                            @foreach ($categories as $category)
-                                <option
-                                    value="{{ $category->id }}"{{ request('category_id') == $category->id ? 'selected' : '' }}>
-                                    {{ $category->content }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="search">
-                        <input type="date" class="search-form__item-date" name="created_at"
-                            {{ request('created_at') }}" />
-                    </div>
+                    <select class="search-form__item-gender" name="gender">
+                        <option value="" {{ request('gender') === '' ? 'selected' : '' }}>性別</option>
+                        <option value="1" {{ request('gender') === '1' ? 'selected' : '' }}>男性</option>
+                        <option value="2" {{ request('gender') === '2' ? 'selected' : '' }}>女性</option>
+                        <option value="3" {{ request('gender') === '3' ? 'selected' : '' }}>その他</option>
+                    </select>
+                    <select class="search-form__item-category"name="category_id">
+                        <option value="">お問い合わせの種類</option>
+                        @foreach ($categories as $category)
+                            <option
+                                value="{{ $category->id }}"{{ request('category_id') == $category->id ? 'selected' : '' }}>
+                                {{ $category->content }}</option>
+                        @endforeach
+                    </select>
+                    <input type="date" class="search-form__item-date" name="created_at" {{ request('created_at') }}" />
+
                     <button class="search-form__button-submit" type="submit">検索</button>
                     <button type="button" class="search-form__button-reset" onclick="location.href='{{ url('/admin') }}'">
                         リセット
@@ -45,7 +41,7 @@
                 <div class="buttons__export">
                     <button class="buttons__export--submit">エクスポート</button>
                 </div>
-                <div class="pagination">
+                <div class="buttons__pagination">
                     {{ $contacts->links() }}
                 </div>
             </div>

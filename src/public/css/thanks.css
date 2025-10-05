@@ -1,3 +1,10 @@
+body {
+    font-family: "Inika", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #8b7969;
+}
+
 .thanks__content {
     margin: 0 auto;
     padding: 30px 15px;

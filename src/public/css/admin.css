@@ -38,11 +38,9 @@
     border: 1px solid #ddd;
     border-radius: 3px;
     margin-right: 20px;
-    /* width: 10%; */
+    width: 10%;
     color: #8b7969;
     background: #e0dfde;
-    width: 85%;
-    height: 100%;
 }
 
 /* .search {
@@ -74,22 +72,18 @@
     border: 1px solid #ddd;
     border-radius: 3px;
     margin-right: 20px;
-    /* width: 25%; */
+    width: 25%;
     color: #8b7969;
     background: #e0dfde;
-    width: 85%;
-    height: 100%;
 }
 .search-form__item-date {
     border: 1px solid #ddd;
     border-radius: 3px;
     appearance: none;
     margin-right: 20px;
-    /* width: 20%; */
+    width: 20%;
     color: #8b7969;
     background: #e0dfde;
-    width: 80%;
-    height: 100%;
 }
 
 .search-form__button {
@@ -138,14 +132,33 @@
 
 .pagination {
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     list-style: none;
     padding: 0;
-    margin: 0;
-    gap: 8px;
+    margin: 0px 200px 0px 0px;
+    font-size: 14px;
+}
+.pagination .page-link {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid #8b7969;
+    color: #8b7969;
+    text-decoration: none;
+    transition: all 0.2s;
 }
 
-.pagination li {
+.pagination .page-link:hover {
+    background-color: #8b7969;
+}
+.pagination .page-item.active .page-link {
+    background-color: #8b7969;
+    border-color: #8b7969;
+    color: #fff;
+}
+.pagination .page-item.disabled .page-link {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 .admin-table {
