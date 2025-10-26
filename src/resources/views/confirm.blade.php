@@ -81,15 +81,16 @@
             </div>
             <div class="form__button">
                 <button class="form__button-submit" type="submit">送信</button>
-                <a href="#" onclick="document.getElementById('back-form').submit(); return false;">修正</a>
+                <button class="form__button-submit" type="submit" name="back" value="home">修正</button>
+                {{-- <a href="#" onclick="document.getElementById('back-form').submit(); return false;">修正</a> --}}
             </div>
         </form>
-        <form id="back-form" action="/" method="POST">
+        {{-- <form id="back-form" action="/" method="POST">
             @csrf
             @foreach ($contact as $key => $value)
                 <input type="hidden" name="{{ $key }}" value="{{ $value }}">
             @endforeach
             <input type="hidden" name="category_id" value="{{ $category->id }}">
-        </form>
+        </form> --}}
     </div>
 @endsection

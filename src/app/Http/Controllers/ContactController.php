@@ -14,11 +14,10 @@ class ContactController extends Controller
     {
         $categories = Category::all();
 
-        if ($request->isMethod('post')) {
-            return redirect('/')
-                ->withInput();
-        }
-
+        // if ($request->isMethod('post')) {
+        //     return redirect('/')
+        //         ->withInput();
+        // }
         return view('index', compact('categories'));
     }
 
@@ -26,14 +25,20 @@ class ContactController extends Controller
     {
 
         $contact = $request->only(['first_name', 'last_name', 'gender', 'email', 'tel1', 'tel2', 'tel3', 'address', 'building', 'detail']);
-        $content = $request->input('category_id');
-        $category = Category::find($content);
+        $category = Category::find($request->category_id);
+        // $content = $request->input('category_id');
+        // $category = Category::find($content);
 
         return view('/confirm', compact('contact', 'category'));
     }
 
     public function store(ContactRequest $request)
     {
+        //indexから移動
+        if ($request->has('back') && $request->back === 'home') {
+            return redirect('/')->withInput();
+        }
+
         $contact = $request->only(['first_name', 'last_name', 'gender', 'email', 'tel', 'address', 'building', 'category_id', 'detail']);
         Contact::create($contact);
 
